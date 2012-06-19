@@ -1,7 +1,7 @@
 research-diary-project
 ======================
 
-Use TeX/LaTeX to keep a research diary on your UNIX/Linux system, with useful tools and scripts to simplify the process.Research Diary Template Readme v.1.1
+Use TeX/LaTeX to keep a research diary on your UNIX/Linux system, with useful tools and scripts to simplify the process.
 
 
 Note
