@@ -21,25 +21,25 @@ pdflatex, you must modify researchdiary.sty. If you stick to eps files, then eve
 Adding entries
 ==============
 
-(1) To add a new entry, execute add_entry in the main diary directory. If this is the first time adding an
-    entry, a directory will be created for the current year, as well as an images subdirectory. The style
-    file for the research diary (researchdiary.sty) as well as the university logo will be soft-linked into
-    the directory for the current year. A script that compiles the entry for the current day will also be
-    soft-linked into the same directory.
+To add a new entry, execute add_entry in the main diary directory. If this is the first time adding an
+entry, a directory will be created for the current year, as well as an images subdirectory. The style
+file for the research diary (researchdiary.sty) as well as the university logo will be soft-linked into
+the directory for the current year. A script that compiles the entry for the current day will also be
+soft-linked into the same directory.
 
-    After running add_entry, enter the directory for the current year and modify today's entry with the 
-    text editor of your choice, e.g. vim, emacs, or kile.
+After running add_entry, enter the directory for the current year and modify today's entry with the 
+text editor of your choice, e.g. vim, emacs, or kile.
 
-(2) I also use a subfolder called images/, and within images/ I have subfolders for each day
-    as necessary. e.g.
+I also use a subfolder called images/, and within images/ I have subfolders for each day
+as necessary. e.g.
 
     images/2011-10-19/
 
-    This avoids potential filename conflicts if I decide to create a figure for one day and simply name it
-    'graph.eps'
+This avoids potential filename conflicts if I decide to create a figure for one day and simply name it
+'graph.eps'
 
-    There is no script to automatically create these image subdirectories to avoid littering the main image
-    directory with many empty subdirectories.
+There is no script to automatically create these image subdirectories to avoid littering the main image
+directory with many empty subdirectories.
 
 Creating anthologies
 ====================
@@ -48,12 +48,12 @@ At the end of the year, to create a master file with all the entries of that yea
 Makefile, specifying the year you wish to compile, and setting your name and institution. After this,
 save your modified Makefile and from the research diary main directory type
 
-$ make anthology
+	$ make anthology
 
 This will create a PDF will all the entries from the year specified. To clean up you main directory after
 compilation, type
 
-$ make clean
+	$ make clean
 
 And that's it!
 
