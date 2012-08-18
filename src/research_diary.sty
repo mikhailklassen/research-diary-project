@@ -1,4 +1,4 @@
-\ProvidesPackage{researchdiary}
+\ProvidesPackage{research_diary}
 %%%%%%%%% MIKHAIL KLASSEN - RESEARCH DIARY HEADER %%%%%%%%%%%%
 %% @author:  Mikhail Klassen                                %%
 %% @contact: mikhail.klassen@gmail.com                      %%
@@ -64,7 +64,18 @@
   \begin{wrapfigure}{r}{0.1\textwidth}
     \vspace{-38pt}
     \begin{center}
-      \includegraphics[width=0.1\textwidth]{mcmaster_logo.eps}
+      \includegraphics[width=0.1\textwidth]{university_logo.eps}
+    \end{center}
+    \vspace{-100pt}
+  \end{wrapfigure}
+}
+
+\newcommand{\univlogopng}{%
+  \noindent % University Logo
+  \begin{wrapfigure}{r}{0.1\textwidth}
+    \vspace{-38pt}
+    \begin{center}
+      \includegraphics[width=0.1\textwidth]{university_logo.png}
     \end{center}
     \vspace{-100pt}
   \end{wrapfigure}
@@ -98,9 +109,7 @@
 \newenvironment{numlist}{
 \begin{enumerate}
   \setlength{\itemsep}{1pt}
-  \setlength{\parskip}{0pt}
-  \setlength{\parsep}{0pt}
-}{\end{enumerate}}
+  \setlength{\parskip}{0pt} \setlength{\parsep}{0pt} }{\end{enumerate}}
 \newenvironment{code}{
 \begin{quote}\begin{framed}
 }{\end{framed}\end{quote}}

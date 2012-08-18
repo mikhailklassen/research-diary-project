@@ -10,11 +10,11 @@ if [ ! -d "$year" ]; then
     mkdir $year
     mkdir $year/images
     cd $year
-    ln -s ../images/mcmaster_logo.eps .
-    ln -s ../images/mcmaster_logo.png .
-    ln -s ../scripts/researchdiary.sty .
-    ln -s ../scripts/clean.sh clean
-    ln -s ../scripts/compile_today.sh compile_today
+    ln -s ../images/university_logo.eps .
+    ln -s ../images/university_logo.png .
+    ln -s ../src/research_diary.sty .
+    ln -s ../src/clean.sh clean
+    ln -s ../src/compile_today.sh compile_today
     cd ..
 fi
 
@@ -30,7 +30,7 @@ if [ -f "$filename" ]; then
     exit
 fi
 
-cp ../scripts/entry.tex $filename
+cp ../src/entry.tex $filename
 
 sed -i "s/@year/$year/g" $filename
 sed -i "s/@MONTH/`date +%B`/g" $filename
