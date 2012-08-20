@@ -1,10 +1,13 @@
 #!/usr/bin/python
 import jinja2 as j2
 import yaml
+import envoy
 import markdown
 from argparse import ArgumentParser
 
-def build_tex(todo, author, institution):
+def build_tex(params, body):
+
+def build_html(params, body):
 
 if __name__ == "__main__"
 	parser = ArgumentParser()
