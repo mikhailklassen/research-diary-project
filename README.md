@@ -8,8 +8,10 @@ Hipster Version
 
 You know what this project needs?  More buzzword tools.  Luckily,
 cool-kid-Keller is here to save the day.  I'm revamping the project to use
-Jinja2 and Mardown to produce a cleaner journal source file, and the ability to
-export your log entries to a wider array of outputs.
+Jinja2, YaML, and Mardown to produce a cleaner journal source file, and the ability to
+export your log entries to a wider array of outputs.  I'm drawing heavy
+inspiration from tools like Jekyll and Hyde, and so I'm calling this version
+Lanyon, after the late friend of the good Dr. Jekyll.
 
 Note
 ====
