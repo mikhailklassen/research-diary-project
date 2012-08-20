@@ -2,11 +2,11 @@
 \documentclass[11pt,letterpaper]{article}
 
 % Working date: The date this entry is describing. Not necessary the date of last edit.
-\newcommand{\workingDate}{\textsc{@year $|$ @MONTH $|$ @dday}}
+\newcommand{\workingDate}{\textsc{ {{ entrydate }} }}
 
 % Name and institution must preceed call to researchdiary.sty package
-\newcommand{\userName}{Mikhail Klassen}
-\newcommand{\institution}{McMaster University}
+\newcommand{\userName}{ {{ author }} }
+\newcommand{\institution}{ {{ institution }} }
 
 % The guts and glory
 \usepackage{researchdiary}
@@ -19,8 +19,6 @@
 
 \section*{ }
 
-
-
-
+{{ body }}
 
 \end{document}
