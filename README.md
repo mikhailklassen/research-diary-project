@@ -3,6 +3,13 @@ research-diary-project
 
 Use TeX/LaTeX to keep a research diary on your UNIX/Linux system, with useful tools and scripts to simplify the process.
 
+Hipster Version
+---------------
+
+You know what this project needs?  More buzzword tools.  Luckily,
+cool-kid-Keller is here to save the day.  I'm revamping the project to use
+Jinja2 and Mardown to produce a cleaner journal source file, and the ability to
+export your log entries to a wider array of outputs.
 
 Note
 ====
