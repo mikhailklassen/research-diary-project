@@ -1,3 +1,13 @@
 author: Your Name Here
 institution: Your Workplace Here
+#Include a fancy Todolist at the top of each entry.
 todo: True
+#Options are daily, weekly, and monthly.  This defines what date lanyon add will produce.  Some
+#folks prefer one file per day, others once a week, and others once a month.
+frequency: weekly
+#For an entry called FILENAME, what command shall we use to compile it to a pdf from LaTeX?
+latex_compiler: 
+    - latex FILENAME.tex 
+    - dvipdf FILENAME.dvi
+#What pdf viewer shall we use?
+pdf_viewer: evince
