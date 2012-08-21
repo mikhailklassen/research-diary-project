@@ -1,7 +1,5 @@
 author: Your Name Here
 institution: Your Workplace Here
-#Include a fancy Todolist at the top of each entry.
-todo: True
 #Options are daily, weekly, and monthly.  This defines what date lanyon add will produce.  Some
 #folks prefer one file per day, others once a week, and others once a month.
 frequency: weekly
