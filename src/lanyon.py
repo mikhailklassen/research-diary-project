@@ -5,6 +5,7 @@ import yaml
 import envoy
 import markdown
 import jinja2 as j2
+from datetime import date
 from argparse import ArgumentParser
 
 def fmt_entry_date(date):
@@ -45,7 +46,21 @@ def build_tex(params, env, body):
 	r = envoy.run(params['pdf_viewer']+' pdf/'+content['date']+'.pdf')
 
 def add(params, env, args):
-	pass
+	today = date.today()
+	if params['frequency'] == 'daily':
+		entry_date = "%4d-%02d-%02d" % (today.year, today.month, today.day)
+	elif params['frequency'] == 'monthly':
+		entry_date = "%4d-%02d-%02d" % (today.year, today.month, 1)
+	else:#Weekly
+		entry_date = "%4d-%02d-%02d" % (today.year, today.month, today.day-today.weekday())
+	if os.path.exists('entries/%s.md' % entry_date):
+		print "File already exists, get to work editing it!"
+		exit(3)
+	else:
+		entry_file = open('entries/%s.md' % entry_date, 'w')
+		entry_file.write(yaml.dump({'date':entry_date}, default_flow_style=False))
+		entry_file.write('body: |')
+		entry_file.close()
 
 def build(params, env, args):
 	builders = {'latex':build_tex}

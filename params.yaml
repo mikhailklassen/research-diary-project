@@ -1,7 +1,7 @@
 author: Your Name Here
 institution: Your Workplace Here
 #Options are daily, weekly, and monthly.  This defines what date lanyon add will produce.  Some
-#folks prefer one file per day, others once a week, and others once a month.
+#folks prefer one file per day, others once a week, and others once a month.  The default is weekly.
 frequency: weekly
 #For an entry called FILENAME, what command shall we use to compile it to a pdf from LaTeX?
 latex_compiler: 
