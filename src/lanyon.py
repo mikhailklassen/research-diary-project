@@ -74,10 +74,43 @@ def build(params, env, args):
 		print "Unable to open entry!"
 		exit(2)
 	builders[args.format](params, env, body)
-	pass
 
 def book(params, env, args):
-	pass
+	template = env.get_template('book.tex')
+	try:
+		os.mkdir('latex')
+	except OSError:
+		pass
+	try:
+		os.mkdir('pdf')
+	except OSError:
+		pass
+	try:
+		os.mkdir('build')
+	except OSError:
+		pass
+	if len(args.command) < 2:
+		print "What year do you want to build the anthology for?"
+		exit(4)
+	entries = [i for i in sorted(os.listdir('entries/')) if i[:4] == args.command[1]]
+	texfile = open('latex/anthology-%s.tex' % args.command[1], 'w')
+	entries_yaml = []
+	for entry in entries:
+		content = yaml.load(open('entries/'+entry).read())
+		content['body'] = texify(content['body'])
+		content['date'] = fmt_entry_date(content['date'])
+		entries_yaml.append(content)
+	texfile.write(template.render(year=args.command[1], author=params['author'], institution=params['institution'], entries=entries_yaml))
+	texfile.close()
+	envoy.run('cp src/research_diary.sty build/')
+	envoy.run('cp latex/anthology-%s.tex build/' % args.command[1])
+	for img in os.listdir('images'): #Kludgey as FUUUUCK
+		envoy.run('cp images/%s build/' % img)
+	for command in params['latex_compiler']:
+		envoy.run(re.sub('FILENAME', 'anthology-%s' % args.command[1], command), cwd='build/')
+	envoy.run('mv build/anthology-%s.pdf pdf/' % args.command[1])
+	envoy.run('rm -r build')
+	r = envoy.run(params['pdf_viewer']+' pdf/anthology-%s.pdf' % args.command[1])
 
 if __name__ == "__main__":
 	commands = {'add':add, 'build':build, 'book':book}

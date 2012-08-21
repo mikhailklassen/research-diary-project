@@ -1,0 +1,26 @@
+%%% Research Diary - Entry
+\documentclass[11pt,letterpaper]{report}
+
+% Name and institution must preceed call to researchdiary.sty package
+\newcommand{\userName}{ {{ author }} }
+\newcommand{\institution}{ {{ institution }} }
+\newcommand{\workingDate}{\textsc{ {{ entrydate }}  Research} }
+
+% The guts and glory
+\usepackage{research_diary}
+
+% Begin document
+\begin{document}
+\title{ Research Diary {{ year }} }
+\maketitle
+
+{% for entry in entries %}
+	% Working date: The date this entry is describing. Not necessary the date of last edit.
+	\section*{ {{ entry.date }} }
+	
+	{{ entry.body }}
+
+	\newpage
+{% endfor %}
+
+\end{document}
