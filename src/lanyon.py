@@ -9,17 +9,33 @@ from datetime import date
 from argparse import ArgumentParser
 
 def fmt_entry_date(date):
-	(year, month, day) = date.split('-')
-	return ' %s $|$ %s $|$ %s' % (year, month, day)
+	return ' %4d $|$ %0d $|$ %2d' % (date.year, date.month, date.day)
 
 def texify(md_string):
 	r = envoy.run('pandoc -f markdown -t latex', data=md_string)
 	return r.std_out
 
+def texify_todo(todo):
+	texstr = '\\section{To Do}\n\\begin{bullets}\n'
+	for task in todo:
+		texstr += '\\item'
+		if task['status'] == 'done':
+			texstr += '[\\checkmark]'
+		if task['status'] == 'started':
+			texstr += '[\\textleaf]'
+		texstr += ' ' 
+		texstr += task['task']
+		texstr += '\n'
+	texstr += '\\end{bullets}\n\n\\textleaf : \\textit{In Progress} \\qquad \\checkmark : \\textit{Completed}\n'
+	return texstr
+
 def build_tex(params, env, body):
 	template = env.get_template('entry.tex')
 	content = yaml.load(body)
-	bodytex = texify(content['body'])
+	bodytex = ''
+	if 'todo' in content:
+		bodytex += texify_todo(content['todo'])
+	bodytex += texify(content['body'])
 	try:
 		os.mkdir('latex')
 	except OSError:
@@ -32,18 +48,18 @@ def build_tex(params, env, body):
 		os.mkdir('build')
 	except OSError:
 		pass
-	texfile = open('latex/'+content['date']+'.tex', 'w')
+	texfile = open('latex/'+str(content['date'])+'.tex', 'w')
 	texfile.write(template.render(entrydate=fmt_entry_date(content['date']), author=params['author'], institution=params['institution'], body=bodytex))
 	texfile.close()
 	envoy.run('cp src/research_diary.sty build/')
-	envoy.run('cp latex/'+content['date']+'.tex build/')
+	envoy.run('cp latex/'+str(content['date'])+'.tex build/')
 	for img in os.listdir('images'): #Kludgey as FUUUUCK
 		envoy.run('cp images/%s build/' % img)
 	for command in params['latex_compiler']:
-		envoy.run(re.sub('FILENAME', content['date'], command), cwd='build/')
-	envoy.run('mv build/'+content['date']+'.pdf pdf/')
-	envoy.run('rm -r build')
-	r = envoy.run(params['pdf_viewer']+' pdf/'+content['date']+'.pdf')
+		envoy.run(re.sub('FILENAME', str(content['date']), command), cwd='build/')
+	envoy.run('mv build/'+str(content['date'])+'.pdf pdf/')
+	#envoy.run('rm -r build')
+	r = envoy.run(params['pdf_viewer']+' pdf/'+str(content['date'])+'.pdf')
 
 def add(params, env, args):
 	today = date.today()
