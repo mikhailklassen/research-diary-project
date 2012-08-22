@@ -23,9 +23,14 @@ def texify_todo(todo):
 			texstr += '[\\checkmark]'
 		if task['status'] == 'started':
 			texstr += '[\\textleaf]'
-		texstr += ' ' 
-		texstr += task['task']
-		texstr += '\n'
+		if task['status'] == 'abandoned':
+			texstr += '\sout{' 
+			texstr += task['task']
+			texstr += '}\n'
+		else:
+			texstr += ' ' 
+			texstr += task['task']
+			texstr += '\n'
 	texstr += '\\end{bullets}\n\n\\textleaf : \\textit{In Progress} \\qquad \\checkmark : \\textit{Completed}\n'
 	return texstr
 
