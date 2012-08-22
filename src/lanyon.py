@@ -24,7 +24,7 @@ def texify_todo(todo):
 		if task['status'] == 'started':
 			texstr += '[\\textleaf]'
 		if task['status'] == 'abandoned':
-			texstr += '\sout{' 
+			texstr += ' \sout{' 
 			texstr += task['task']
 			texstr += '}\n'
 		else:
