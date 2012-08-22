@@ -58,7 +58,7 @@ def build_tex(params, env, body):
 	for command in params['latex_compiler']:
 		envoy.run(re.sub('FILENAME', str(content['date']), command), cwd='build/')
 	envoy.run('mv build/'+str(content['date'])+'.pdf pdf/')
-	#envoy.run('rm -r build')
+	envoy.run('rm -r build')
 	r = envoy.run(params['pdf_viewer']+' pdf/'+str(content['date'])+'.pdf')
 
 def add(params, env, args):
