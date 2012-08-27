@@ -19,9 +19,9 @@ Requirements
 The first three packages are all python modules, and if you have pip installed
 on your system, you can install them using
 
-`# pip install PyYAML`
-`# pip install Markdown`
-`# pip install Jinja2`
+    # pip install PyYAML
+    # pip install Markdown
+    # pip install Jinja2
 
 Envoy is in PyPI, but the version is old.  You __must__ install the github
 version for this package to work.  This might be fixed in the future.  I'll keep
