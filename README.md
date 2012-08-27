@@ -1,70 +1,84 @@
-research-diary-project
+Lanyon
+----------------------
+Use yaml and markdown with a spritz of LaTeX to keep a research diary on your 
+UNIX/Linux system, with useful tools and scripts to simplify the process, and 
+produce nice-looking output.  This tool can be thought of as
+research-diary-project The Next Generation.  It draws big inspiration from
+[hyde](http://hyde.github.com), and thus has been given the name of Dr. Jekyll's
+eminently sceptical colleague, Dr. Hastie Lanyon.
+
+Requirements
 ======================
+* [pyyaml](http://pyyaml.org/wiki/PyYAML)
+* [python-markdown](http://freewisdom.org/projects/python-markdown/)
+* [jinja2](http://jinja.pocoo.org/docs/)
+* [envoy](https://github.com/kennethreitz/envoy)
+* [pandoc](http://johnmacfarlane.net/pandoc/)
+* A latex compiler of your choice
 
-Use TeX/LaTeX to keep a research diary on your UNIX/Linux system, with useful tools and scripts to simplify the process.
+The first three packages are all python modules, and if you have pip installed
+on your system, you can install them using
 
-Hipster Version
----------------
+    # pip install PyYAML
+    # pip install Markdown
+    # pip install Jinja2
 
-You know what this project needs?  More buzzword tools.  Luckily,
-cool-kid-Keller is here to save the day.  I'm revamping the project to use
-Jinja2, YaML, and Mardown to produce a cleaner journal source file, and the ability to
-export your log entries to a wider array of outputs.  I'm drawing heavy
-inspiration from tools like Jekyll and Hyde, and so I'm calling this version
-Lanyon, after the late friend of the good Dr. Jekyll.
+Envoy is in PyPI, but the version is old.  You __must__ install the github
+version for this package to work.  This might be fixed in the future.  I'll keep
+an eye on it.
 
-Note
-====
+Pandoc is a really cool tool written by the fantastically talented John
+MacFarlane.  You ought to have that sucker installed anyway, and can likely get
+it through your distro's package manager (or from the website if you are on OS
+X or Windows).
 
-The research diary employs the McMaster Logo. There is an eps and a png file. If you plan to compile
-your research entries including eps images, you'll need to compile using latex instead of pdflatex.
+Installation
+======================
+I haven't yet put together an install script, so for the time being, everything
+you need is right here in the main directory.  I'd recommend putting a symlink
+for lanyon into your `/usr/bin` with the following command inside the lanyon
+directory:
 
-In this case, there is nothing you need to do. The researchdiary.sty file is already prepared to handle
-eps files. Other, you will need to modify the researchdiary.sty file, under the 'univlogo' definition,
-to use mcmaster_logo.png instead of mcmaster_logo.eps. The researchdiary.sty file is located in the scripts/
-directory. 
+    ln -s `pwd`/src/lanyon.py /usr/bin/lanyon
+	
 
-If you plan to include images that are in pdf, jpg, or png format, and hence will be compiling using
-pdflatex, you must modify researchdiary.sty. If you stick to eps files, then everything may be left as is.
+Basic Usage
+======================
+After getting lanyon, you will notice there are 3 directories, and 2 files in
+the root directory.  The `README.md` file is the document you are currently
+reading.  The `params.yaml` file contains the configuration options for your
+journal.  The options are described below
 
-Adding entries
-==============
+* _author_ The author name for the journals (That's you!)
+* _institution_ Your university or company
+* _frequency_ Whether you want a new journal file entry daily, weekly, or
+  monthly
+* _latex\_compiler_ How you want LaTeX files to be built into pdfs.  This option
+  is a list of commands which will be run sequentially, with `FILENAME` used for
+  the basename.
+* _pdf\_viewer_ What program shall be used to view pdf files.
 
-To add a new entry, execute add_entry in the main diary directory. If this is the first time adding an
-entry, a directory will be created for the current year, as well as an images subdirectory. The style
-file for the research diary (researchdiary.sty) as well as the university logo will be soft-linked into
-the directory for the current year. A script that compiles the entry for the current day will also be
-soft-linked into the same directory.
+The three directories you should currently see in the lanyon root are entries,
+images, and sr.  The `entries` directory will contain the raw text entries for
+your journal. Any images you include will be placed in `images`, and the source
+for `lanyon.py` and the various templates for Jinja2 are in `src`.
 
-After running add_entry, enter the directory for the current year and modify today's entry with the 
-text editor of your choice, e.g. vim, emacs, or kile.
+Once you have configured lanyon to your liking, you can make your first skeleton
+entry using the following command `lanyon add`.  This will put a new file in the
+entries directory, with a name corresponding to today's date.
 
-I also use a subfolder called images/, and within images/ I have subfolders for each day
-as necessary. e.g.
+You can start editing it right away, but I'd recommend you first look at
+example.md in the entries directory.  It shows you the basic layout of what an
+entry should look like.  The body of the entry is plain markdown, but any latex
+inside it will be passed on through and compiled as latex.  Keep in mind that
+yaml requires the body lines to be indented by a single space.
 
-    images/2011-10-19/
+To compile your new entry into a pdf, just run `lanyon build`, and the most
+recent entry in the `entries` directory will be compiled to latex (a tex file
+will be placed in the `latex` directory, and a pdf (in the `pdf` directory).
+And that's about it for the basic usage.
 
-This avoids potential filename conflicts if I decide to create a figure for one day and simply name it
-'graph.eps'
-
-There is no script to automatically create these image subdirectories to avoid littering the main image
-directory with many empty subdirectories.
-
-Creating anthologies
-====================
-
-At the end of the year, to create a master file with all the entries of that year, you must modify the
-Makefile, specifying the year you wish to compile, and setting your name and institution. After this,
-save your modified Makefile and from the research diary main directory type
-
-	$ make anthology
-
-This will create a PDF will all the entries from the year specified. To clean up you main directory after
-compilation, type
-
-	$ make clean
-
-And that's it!
-
-Happy researching!
-
+Advanced Usage
+======================
+You can also use lanyon to compile a big book of entries for an entire year's
+work using the `lanyon book YEAR` command.
