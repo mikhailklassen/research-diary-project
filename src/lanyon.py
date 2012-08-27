@@ -74,7 +74,8 @@ def add(params, env, args):
 		exit(3)
 	else:
 		entry_file = open('entries/%s.md' % entry_date, 'w')
-		entry_file.write(yaml.dump({'date':entry_date}, default_flow_style=False))
+		entry_file.write('date: %s\n' % entry_date)
+		entry_file.write('todo:\n')
 		entry_file.write('body: |')
 		entry_file.close()
 
