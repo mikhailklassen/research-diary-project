@@ -5,7 +5,7 @@ UNIX/Linux system, with useful tools and scripts to simplify the process, and
 produce nice-looking output.  This tool can be thought of as
 research-diary-project The Next Generation.  It draws big inspiration from
 [hyde](http://hyde.github.com), and thus has been given the name of Dr. Jekyll's
-eminently skeptical colleague, Dr. Hastie Lanyon.
+eminently sceptical colleague, Dr. Hastie Lanyon.
 
 Requirements
 ======================
@@ -35,7 +35,7 @@ X or Windows).
 Installation
 ======================
 I haven't yet put together an install script, so for the time being, everything
-you need is right here in the main directory.  I'd recommend putting a simlink
+you need is right here in the main directory.  I'd recommend putting a symlink
 for lanyon into your `/usr/bin` with the following command inside the lanyon
 directory:
 
@@ -46,7 +46,7 @@ Basic Usage
 ======================
 After getting lanyon, you will notice there are 3 directories, and 2 files in
 the root directory.  The `README.md` file is the document you are currently
-reading.  The params.yaml file contains the configuration options for your
+reading.  The `params.yaml` file contains the configuration options for your
 journal.  The options are described below
 
 * _author_ The author name for the journals (That's you!)
