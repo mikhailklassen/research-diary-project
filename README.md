@@ -39,7 +39,7 @@ you need is right here in the main directory.  I'd recommend putting a simlink
 for lanyon into your `/usr/bin` with the following command inside the lanyon
 directory:
 
-    ln -s \`pwd\`/src/lanyon.py /usr/bin/lanyon
+    ln -s `pwd`/src/lanyon.py /usr/bin/lanyon
 	
 
 Basic Usage
