@@ -1,4 +1,7 @@
 date: YEAR-MONTH-DAY
+todo:
+ - status: do/started/done
+ - task: a description of the task at hand.
 body: |
  # I AM A HEADER
  ## I AM A SMALLER HEADER
