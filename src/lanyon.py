@@ -17,6 +17,8 @@ def texify(md_string):
 
 def texify_todo(todo):
 	texstr = '\\section{To Do}\n\\begin{bullets}\n'
+	if todo == None:
+		return ""
 	for task in todo:
 		texstr += '\\item'
 		if task['status'] == 'done':
