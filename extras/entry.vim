@@ -18,7 +18,7 @@ syn match entryDate '\d\{4}-\d\{2}-\d\{2}'
 syn match entryTask '.*' contained
 syn match entryStatus '.*' contained
 syn match entryTaskHead "task:" nextgroup=entryTask 
-syn match entryStatusHead " - status: " nextgroup=entryStatus 
+syn match entryStatusHead "- status: " nextgroup=entryStatus 
 
 syn keyword entryHead todo 
 syn keyword entryHead date nextgroup=entryDate
