@@ -68,7 +68,7 @@ entry using the following command `lanyon add`.  This will put a new file in the
 entries directory, with a name corresponding to today's date.
 
 You can start editing it right away, but I'd recommend you first look at
-example.md in the entries directory.  It shows you the basic layout of what an
+example.entry in the entries directory.  It shows you the basic layout of what an
 entry should look like.  The body of the entry is plain markdown, but any latex
 inside it will be passed on through and compiled as latex.  Keep in mind that
 yaml requires the body lines to be indented by a single space.

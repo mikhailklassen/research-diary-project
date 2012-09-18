@@ -76,11 +76,11 @@ def add(params, env, args):
 		entry_date = "%4d-%02d-%02d" % (today.year, today.month, 1)
 	else:#Weekly
 		entry_date = "%4d-%02d-%02d" % (today.year, today.month, today.day-today.weekday())
-	if os.path.exists('entries/%s.md' % entry_date):
+	if os.path.exists('entries/%s.entry' % entry_date):
 		print "File already exists, get to work editing it!"
 		exit(3)
 	else:
-		entry_file = open('entries/%s.md' % entry_date, 'w')
+		entry_file = open('entries/%s.entry' % entry_date, 'w')
 		entry_file.write('date: %s\n' % entry_date)
 		entry_file.write('todo:\n')
 		entry_file.write('body: |')
