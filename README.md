@@ -41,6 +41,9 @@ directory:
 
     ln -s `pwd`/src/lanyon.py /usr/bin/lanyon
 	
+Lanyon also includes a vim syntax file in the `/extras` directory.  You can copy
+the `entry.vim` file to your `~/.vim/syntax/` directory and the `filetype.vim` 
+file to your `~/.vim/` directory.
 
 Basic Usage
 ======================
@@ -49,14 +52,14 @@ the root directory.  The `README.md` file is the document you are currently
 reading.  The `params.yaml` file contains the configuration options for your
 journal.  The options are described below
 
-* _author_ The author name for the journals (That's you!)
-* _institution_ Your university or company
-* _frequency_ Whether you want a new journal file entry daily, weekly, or
+* *author* The author name for the journals (That's you!)
+* *institution* Your university or company
+* *frequency* Whether you want a new journal file entry daily, weekly, or
   monthly
-* _latex\_compiler_ How you want LaTeX files to be built into pdfs.  This option
+* *latex\_compiler* How you want LaTeX files to be built into pdfs.  This option
   is a list of commands which will be run sequentially, with `FILENAME` used for
   the basename.
-* _pdf\_viewer_ What program shall be used to view pdf files.
+* *pdf\_viewer* What program shall be used to view pdf files.
 
 The three directories you should currently see in the lanyon root are entries,
 images, and sr.  The `entries` directory will contain the raw text entries for
