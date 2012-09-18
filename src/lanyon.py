@@ -80,9 +80,16 @@ def add(params, env, args):
 		print "File already exists, get to work editing it!"
 		exit(3)
 	else:
+		try:
+			previous_entry = 'entries/'+sorted(os.listdir('entries'))[-1]
+			todo_items = [elem for elem in yaml.load(open(previous_entry))['todo'] if 
+			elem['status'] != 'done']
+			todo = yaml.dump({"todo":todo_items}, default_flow_style=False)
+		except:
+			todo ='todo:\n'
 		entry_file = open('entries/%s.entry' % entry_date, 'w')
 		entry_file.write('date: %s\n' % entry_date)
-		entry_file.write('todo:\n')
+		entry_file.write(todo)
 		entry_file.write('body: |')
 		entry_file.close()
 
