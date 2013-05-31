@@ -16,5 +16,3 @@ dvips -q -o "$PSFILE" "$DVIFILE" -R0
 ps2pdf "$PSFILE" "$PDFFILE"
 
 rm -f *.out *.dvi *.ps *.tex.backup *~ *.aux *.log
-
-okular $PDFFILE >& /dev/null &
