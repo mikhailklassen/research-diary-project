@@ -133,8 +133,23 @@ create_anthology ()
 
 function usage ()
 {
-    echo "Something"
-    
+    cat << EOF
+    usage: $0 options
+
+    Master script file that provides utilities to maintain a journal using LaTeX.
+
+    OPTIONS:
+    -h  Show this message and quit
+
+    -t  Add new entry for today
+
+    -c  Compile today's entry
+
+    -a  <year>
+        Year to create anthology of
+
+EOF
+
 }
 
 if [ "$#" -eq 0 ]; then
@@ -142,7 +157,7 @@ if [ "$#" -eq 0 ]; then
     exit 0
 fi
 
-while getopts "tca:" OPTION
+while getopts "tca:h" OPTION
 do
     case $OPTION in
         t)
