@@ -92,7 +92,7 @@ create_anthology ()
     echo "%" >> $FileName
     echo "\documentclass[letterpaper,11pt]{article}" >> $FileName
     echo "\newcommand{\userName}{$author}" >> $FileName
-    echo "\usepackage{researchdiary}" >> $FileName
+    echo "\usepackage{research_diary}" >> $FileName
     echo " " >> $FileName
     echo "\title{Research Diary - $year_to_compile}" >> $FileName
     echo "\author{$author}" >> $FileName
@@ -133,6 +133,7 @@ create_anthology ()
     cat $tmpName >> $FileName
     echo "\end{document}" >> $FileName
 
+    ln -sf ../templates/research_diary.sty .
     latexmk -pdf -recorder -pdflatex="pdflatex -interactive=nonstopmode" -use-make $FileName
     mv *.pdf ../$pdf_dir/
 

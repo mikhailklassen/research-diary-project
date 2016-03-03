@@ -22,20 +22,25 @@
 \usepackage{textcomp}
 \usepackage{color}
 \usepackage{booktabs}
-\usepackage[usenames,dvipsnames]{pstricks}
 \definecolor{darkblue}{RGB}{47,68,117}
 \definecolor{lightgray}{gray}{0.95}
-\usepackage{hyperref}
+\PassOptionsToPackage{pdftex,hyperfootnotes=false,pdfpagelabels}{hyperref}
+	\usepackage{hyperref}  % backref linktocpage pagebackref
+\pdfcompresslevel=9
+\pdfadjustspacing=1 
+\PassOptionsToPackage{pdftex}{graphicx}
+	\usepackage{graphicx} 
 \hypersetup{
     pdftitle={Research Diary},                    % title
-    pdfauthor={\userName $\;$ (\institution)},    % author
-    pdfsubject={Physics \& Astronomy},            % subject
+    pdfauthor={\userName $\;$},                   % author
+    pdfsubject={Research diary},                  % subject
     colorlinks=true,        % false: boxed links; true: colored links
     linkcolor=darkblue,     % color of internal links
     citecolor=green,        % color of links to bibliography
     filecolor=magenta,      % color of file links
     urlcolor=blue           % color of external links
 }
+\usepackage[default,osfigures,scale=0.95]{opensans}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Notes on use of hyperlinks:
@@ -55,7 +60,6 @@
 \lhead{\textsc{\userName}}
 \rfoot{\textsc{\thepage}}
 \cfoot{\textit{Last modified: \today}}
-\lfoot{\textsc{\institution}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%% NEW COMMANDS %%%%%%%%%%%%%%
@@ -98,6 +102,27 @@
 \newcommand{\eqnend}{\end{eqnarray}}
 \newcommand{\deriv}[2]{\frac{d #1}{d #2}}
 \newcommand{\bigO}{\mathcal{O}}
+
+%%%%%%%%%%% LISTINGS %%%%%%%%%%%%%%%
+\usepackage{listings} 
+%\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
+\lstset{language=[LaTeX]Tex,%C++,
+    keywordstyle=\color{RoyalBlue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{Green}\ttfamily,
+    stringstyle=\rmfamily,
+    numbers=none,%left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=5,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip
+    %frame=L
+} 
 
 %%%%%%%%% NEW ENVIRONMENTS %%%%%%%%%%%%
 \newenvironment{bullets}{
