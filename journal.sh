@@ -61,10 +61,10 @@ function compile_today ()
     latexmk -pdf -recorder -pdflatex="pdflatex -interactive=nonstopmode" -use-make $todays_entry
     clean
 
-    if [ ! -d "../../pdfs/$year" ]; then
-        mkdir -p ../../pdfs/$year
+    if [ ! -d "../../$pdf_dir/$year" ]; then
+        mkdir -p ../../$pdf_dir/$year
     fi
-    mv *.pdf ../../pdfs/$year/
+    mv *.pdf ../../$pdf_dir/$year/
     echo "Generated pdf moved to pdfs directory."
     cd ../../
 }
@@ -76,28 +76,26 @@ create_anthology ()
     tmpName=$Name".tmp"
 
     echo "Research Diary"
-    echo "User: $Author"
+    echo "Author: $author"
     echo "Year: $year_to_compile"
 
-    if [ -d "$diary_dir/$year_to_compile" ]; then
-        echo "Directory for year $year_to_compile found. Continuing..."
-    else
+    if [ ! -d "$diary_dir/$year_to_compile" ]; then
         echo "ERROR: No directory for $year_to_compile exists"
         exit;
     fi
-    
+
     cd "$diary_dir"
 
     touch $FileName
     echo "%" >> $FileName
-    echo "% Research Diary for $Author, $year_to_compile" >> $FileName
+    echo "% Research Diary for $author, $year_to_compile" >> $FileName
     echo "%" >> $FileName
     echo "\documentclass[letterpaper,11pt]{article}" >> $FileName
-    echo "\newcommand{\userName}{$Author}" >> $FileName
+    echo "\newcommand{\userName}{$author}" >> $FileName
     echo "\usepackage{researchdiary}" >> $FileName
     echo " " >> $FileName
     echo "\title{Research Diary - $year_to_compile}" >> $FileName
-    echo "\author{$Author}" >> $FileName
+    echo "\author{$author}" >> $FileName
     echo " " >> $FileName
 
     echo "\chead{\textsc{Research Diary}}" >> $FileName
@@ -113,7 +111,7 @@ create_anthology ()
     echo "\textbf{Research Diary} \\\\[3mm]" >> $FileName
     echo "\textbf{$year_to_compile} \\\\[2cm]" >> $FileName
     echo "\end{LARGE} \begin{large}" >> $FileName
-    echo "$Author \end{large} \\\\" >> $FileName
+    echo "$author \end{large} \\\\" >> $FileName
     echo "\textsc{Compiled \today}" >> $FileName
     echo "\end{center}" >> $FileName
     echo "\thispagestyle{empty}" >> $FileName
@@ -133,9 +131,15 @@ create_anthology ()
     sed -i 's/\\newcommand/\\renewcommand/g' $tmpName
 
     cat $tmpName >> $FileName
-
     echo "\end{document}" >> $FileName
 
+    latexmk -pdf -recorder -pdflatex="pdflatex -interactive=nonstopmode" -use-make $FileName
+    mv *.pdf ../$pdf_dir/
+
+    clean
+    rm $tmpName
+
+    echo "$year_to_compile master document created in $pdf_dir."
     cd ../
 }
 
@@ -154,7 +158,7 @@ function usage ()
     -c  Compile today's entry
 
     -a  <year>
-        Year to create anthology of
+        Year to generate anthology of
 
 EOF
 
