@@ -7,6 +7,8 @@ diary_dir="diary"
 pdf_dir="pdfs"
 todays_entry="$year-$month-$day.tex"
 author="Ankur Sinha"
+year_to_compile="meh"
+entry_to_compile="meh"
 
 
 function add_entry ()
@@ -67,6 +69,49 @@ function compile_today ()
     mv *.pdf ../../$pdf_dir/$year/
     echo "Generated pdf moved to pdfs directory."
     cd ../../
+}
+
+function compile_all ()
+{
+    if [ ! -d "$diary_dir/$year_to_compile/" ]; then
+      echo "$diary_dir/$year_to_compile/ does not exist. Exiting."
+      exit -1
+    fi
+
+    cd "$diary_dir/$year_to_compile/"
+    echo "Compiling all in $year_to_compile."
+    for i in $( ls $year_to_compile-*.tex ); do
+      latexmk -pdf -recorder -pdflatex="pdflatex -interactive=nonstopmode" -use-make $i
+      clean
+    done
+
+    if [ ! -d "../../$pdf_dir/$year_to_compile" ]; then
+        mkdir -p ../../$pdf_dir/$year_to_compile
+    fi
+    mv *.pdf ../../$pdf_dir/$year_to_compile/
+    echo "Generated pdf moved to pdfs directory."
+    cd ../../
+}
+
+function compile_specific ()
+{
+    year=${entry_to_compile:0:4}
+    if [ ! -d "$diary_dir/$year/" ]; then
+      echo "$diary_dir/$year/ does not exist. Exiting."
+      exit -1
+    fi
+
+    cd "$diary_dir/$year/"
+    echo "Compiling $entry_to_compile"
+    latexmk -pdf -recorder -pdflatex="pdflatex -interactive=nonstopmode" -use-make $entry_to_compile
+    clean
+    if [ ! -d "../../$pdf_dir/$year" ]; then
+        mkdir -p ../../$pdf_dir/$year
+    fi
+    mv *.pdf ../../$pdf_dir/$year/
+    echo "Generated pdf moved to pdfs directory."
+    cd ../../
+
 }
 
 create_anthology ()
@@ -163,6 +208,12 @@ function usage ()
     -a  <year>
         Year to generate anthology of
 
+    -p  <year>
+        Compile all entries in this year
+
+    -s  <entry> (yyyy-mm-dd)
+        Compile specific entry
+
 EOF
 
 }
@@ -172,7 +223,7 @@ if [ "$#" -eq 0 ]; then
     exit 0
 fi
 
-while getopts "tca:h" OPTION
+while getopts "tca:hp:s:" OPTION
 do
     case $OPTION in
         t)
@@ -190,6 +241,16 @@ do
             ;;
         h)
             usage
+            exit 0
+            ;;
+        p)
+            year_to_compile=$OPTARG
+            compile_all
+            exit 0
+            ;;
+        s)
+            entry_to_compile=$OPTARG
+            compile_specific
             exit 0
             ;;
         ?)
