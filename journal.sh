@@ -4,6 +4,7 @@ year=`date +%G`
 month=`date +%m`
 day=`date +%d`
 diary_dir="diary"
+pdf_dir="pdfs"
 todays_entry="$year-$month-$day.tex"
 author="Ankur Sinha"
 
@@ -17,8 +18,9 @@ function add_entry ()
         mkdir "$diary_dir"
     fi
 
-    if [ ! -d "$year" ]; then
+    if [ ! -d "$diary_dir/$year" ]; then
         mkdir "$diary_dir/$year"
+        mkdir "$pdf_dir/$year"
         mkdir "$diary_dir/$year/images"
     fi
 
@@ -58,6 +60,12 @@ function compile_today ()
     echo "Compiling $todays_entry."
     latexmk -pdf -recorder -pdflatex="pdflatex -interactive=nonstopmode" -use-make $todays_entry
     clean
+
+    if [ ! -d "../../pdfs/$year" ]; then
+        mkdir -p ../../pdfs/$year
+    fi
+    mv *.pdf ../../pdfs/$year/
+    echo "Generated pdf moved to pdfs directory."
     cd ../../
 }
 
