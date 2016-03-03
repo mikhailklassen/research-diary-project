@@ -59,3 +59,9 @@ And that's it!
 
 Happy researching!
 
+Requirements
+============
+- opensans.sty
+- framed.sty
+- wrapfig.sty
+- multirow.sty

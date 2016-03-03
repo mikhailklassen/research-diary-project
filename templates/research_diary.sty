@@ -14,7 +14,6 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage[hmargin=2cm,vmargin=2.5cm]{geometry}
 \usepackage{multirow}
 \usepackage{wrapfig}
 \usepackage{epsfig}
@@ -22,14 +21,15 @@
 \usepackage{textcomp}
 \usepackage{color}
 \usepackage{booktabs}
+\usepackage[default,osfigures,scale=0.95]{opensans}
+\usepackage{etoolbox}
+\usepackage{makeidx}
+\makeindex
 \definecolor{darkblue}{RGB}{47,68,117}
 \definecolor{lightgray}{gray}{0.95}
-\PassOptionsToPackage{pdftex,hyperfootnotes=false,pdfpagelabels}{hyperref}
-	\usepackage{hyperref}  % backref linktocpage pagebackref
+\usepackage[pdftex,hyperfootnotes=false,pdfpagelabels]{hyperref}
 \pdfcompresslevel=9
 \pdfadjustspacing=1 
-\PassOptionsToPackage{pdftex}{graphicx}
-	\usepackage{graphicx} 
 \hypersetup{
     pdftitle={Research Diary},                    % title
     pdfauthor={\userName $\;$},                   % author
@@ -40,14 +40,6 @@
     filecolor=magenta,      % color of file links
     urlcolor=blue           % color of external links
 }
-\usepackage[default,osfigures,scale=0.95]{opensans}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Notes on use of hyperlinks:
-%% \url{http://www.wikibooks.org}
-%% \href{http://www.wikibooks.org}{wikibooks home}
-%% \href{mailto:email@site.com}{email@site.com}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagestyle{fancy}
 \setlength\parindent{0in}
@@ -61,47 +53,6 @@
 \rfoot{\textsc{\thepage}}
 \cfoot{\textit{Last modified: \today}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%% NEW COMMANDS %%%%%%%%%%%%%%
-\newcommand{\logoEPS}{%
-  \noindent % University Logo
-  \begin{wrapfigure}{r}{0.1\textwidth}
-    \vspace{-38pt}
-    \begin{center}
-      \includegraphics[width=0.1\textwidth]{university_logo.eps}
-    \end{center}
-    \vspace{-100pt}
-  \end{wrapfigure}
-}
-
-\newcommand{\logoPNG}{%
-  \noindent % University Logo
-  \begin{wrapfigure}{r}{0.1\textwidth}
-    \vspace{-38pt}
-    \begin{center}
-      \includegraphics[width=0.1\textwidth]{university_logo.png}
-    \end{center}
-    \vspace{-100pt}
-  \end{wrapfigure}
-}
-
-%%%%%%%%%%%% ASTRONOMY %%%%%%%%%%%%%%%%
-\newcommand{\Msun}{M_\odot}
-\newcommand{\Lsun}{L_\odot}
-\newcommand{\Rsun}{R_\odot}
-\newcommand{\Mearth}{M_\oplus}
-\newcommand{\Learth}{L_\oplus}
-\newcommand{\Rearth}{R_\oplus}
-%%%%%%%%%%% MATHEMATICS %%%%%%%%%%%%%%%
-\newcommand{\grad}{\nabla}
-\newcommand{\be}{\begin{equation}}
-\newcommand{\ee}{\end{equation}}
-\newcommand{\bea}{\begin{eqnarray}}
-\newcommand{\eea}{\end{eqnarray}}
-\newcommand{\eqnarr}{\begin{eqnarray}}
-\newcommand{\eqnend}{\end{eqnarray}}
-\newcommand{\deriv}[2]{\frac{d #1}{d #2}}
-\newcommand{\bigO}{\mathcal{O}}
 
 %%%%%%%%%%% LISTINGS %%%%%%%%%%%%%%%
 \usepackage{listings} 
@@ -122,21 +73,11 @@
     frame=single,
     belowcaptionskip=.75\baselineskip
     %frame=L
-} 
+}
 
-%%%%%%%%% NEW ENVIRONMENTS %%%%%%%%%%%%
-\newenvironment{bullets}{
-\begin{itemize}
-  \setlength{\itemsep}{1pt}
-  \setlength{\parskip}{0pt}
-  \setlength{\parsep}{0pt}
-}{\end{itemize}}
-\newenvironment{numlist}{
-\begin{enumerate}
-  \setlength{\itemsep}{1pt}
-  \setlength{\parskip}{0pt} \setlength{\parsep}{0pt} }{\end{enumerate}}
-\newenvironment{code}{
-\begin{quote}\begin{framed}
-}{\end{framed}\end{quote}}
-                           
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Index in margin
+\makeatletter
+\pretocmd\@wrindex
+  {\marginpar{\begingroup\catcode`\{=12\catcode`\}=12 \texttt{\scantokens{#1}}\endgroup}}
+  {}{}
+\makeatother

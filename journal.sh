@@ -126,11 +126,13 @@ create_anthology ()
     done
 
     sed -i 's/\\begin{document}//g' $tmpName
+    sed -i 's/\\printindex//g' $tmpName
     sed -i 's/\\end{document}//g' $tmpName
     sed -i 's/\\includegraphics\(.*\){\([A-Za-z0-9]*\)\/\([A-Za-z0-9_-]*\)/\\includegraphics\1{\3/g' $tmpName
     sed -i 's/\\newcommand/\\renewcommand/g' $tmpName
 
     cat $tmpName >> $FileName
+    echo "\printindex" >> $FileName
     echo "\end{document}" >> $FileName
 
     ln -sf ../templates/research_diary.sty .
