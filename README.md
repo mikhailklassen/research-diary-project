@@ -1,3 +1,6 @@
+Unmaintained. Please use [calliope](https://github.com/sanjayankur31/calliope) instead.
+
+
 research-diary-project
 ======================
 
